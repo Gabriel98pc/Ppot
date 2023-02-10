@@ -644,20 +644,15 @@ http.listen(process.env.PORT ||3000, function(){
 
 	var mysql = require('mysql');
 
-	con = mysql.createConnection({
+	con = mysql.createPool({
+	  connectionLimit : 10,
 	  host: "172.31.88.93",
 	  user: "juegopie_owner",
 	  password: "Gaby41580918Gaby",
 	  database: "juegopie_users"
 	});
 
-	con.connect(function(err) 
-	{
-	  if (err)
-	  	throw err;
 
-	  console.log("Connected!");
-	});
 
 	
 });
