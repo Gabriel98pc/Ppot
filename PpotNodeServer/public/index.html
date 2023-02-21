@@ -22,8 +22,10 @@
       <div id="unity-warning"> </div>
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
-        <div id="unity-fullscreen-button"></div>
         <div id="unity-build-title"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-facebook-button"></div>
+        
       </div>
     </div>
 		<script src="/socket.io/socket.io.js"></script>
@@ -35,6 +37,7 @@
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var facebookButton = document.querySelector("#unity-facebook-button");
       var warningBanner = document.querySelector("#unity-warning");
 
       // Shows a temporary message banner/ribbon for a few seconds, or
@@ -62,11 +65,11 @@
       }
 
      var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/build.loader.js";
+    var loaderUrl = buildUrl + "/public.loader.js";
        var config = {
-           dataUrl: buildUrl + "/build.data",
-           frameworkUrl: buildUrl + "/build.framework.js",
-           codeUrl: buildUrl + "/build.wasm",
+           dataUrl: buildUrl + "/public.data",
+           frameworkUrl: buildUrl + "/public.framework.js",
+           codeUrl: buildUrl + "/public.wasm",
            streamingAssetsUrl: "StreamingAssets",
            companyName: "Gabriel",
            productName: "PiedraPapelOTijera",
@@ -106,6 +109,20 @@
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
           };
+
+          facebookButton.onclick = () => {
+            window.open('https://www.facebook.com/profile.php?id=100089948482402', '_blank');
+          };
+
+          if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) 
+          {
+
+          }
+          else
+          {
+            unityInstance.SendMessage('InputTools','DisableMobileInput');
+          }
+
         }).catch((message) => {
           alert(message);
         });
